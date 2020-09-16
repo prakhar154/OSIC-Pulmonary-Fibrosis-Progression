@@ -31,15 +31,15 @@ class FeatureEngineering:
 		
 
 	def linear(self):
-		ss = submission[['Patient', "Weeks", "Confidence", "Patient_Week"]]
+		ss = self.submission[['Patient', "Weeks", "Confidence", "Patient_Week"]]
 		ss = ss.merge(test.drop("Weeks", axis=1), on='Patient')
 
 		# ss.head()
-		train["Dataset"] = "train"
-		test["Dataset"] = "test"
+		self.train["Dataset"] = "train"
+		self.test["Dataset"] = "test"
 		ss["Dataset"] = "ss"
 
-		all_data = train.append([test, ss])
+		all_data = self.train.append([self.test, ss])
 		all_data = all_data.reset_index(drop=True)
 
 		all_data["First_Week"] = all_data["Weeks"]
@@ -58,6 +58,6 @@ class FeatureEngineering:
 		all_data = all_data.merge(first_fvc, on="Patient", how="left")
 		all_data["Weeks_Passed"] = all_data["Weeks"] - all_data["First_Week"]
 		all_data["Height"] = all_data.apply(utils.calculate_height(), axis=1)
-		
+
 
 
