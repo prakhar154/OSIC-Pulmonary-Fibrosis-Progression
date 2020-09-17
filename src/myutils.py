@@ -4,5 +4,3 @@ def calculate_height(row):
 	else:
 		return row["First_FVC"] / (21.78 - .101 * row["Age"])
 
-def scale_features(series):
-	return (series - series.min()) / (series.max() - series.min())

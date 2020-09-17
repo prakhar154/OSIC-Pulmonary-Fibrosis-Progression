@@ -1,4 +1,5 @@
 import pandas as pd
+import myutils
 
 class CategoricalFeatures:
 	def __init__(self, df, categorical_features, encoding_type, handle_na=False):
@@ -26,9 +27,22 @@ class CategoricalFeatures:
 			return self._one_hot()
 
 if __name__ == "__main__":
-	df_train = pd.read_csv("../input/train.csv")
-	print(df_train.head())
+	df_train = pd.read_csv("../input/interim/train_fe.csv")
+	df_test = pd.read_csv("../input/interim/test_fe.csv")
+	df_ss = pd.read_csv("../input/interim/ss_fe.csv")
+
 	cols = ["Sex", "SmokingStatus"]
+	
 	cat_feats = CategoricalFeatures(df_train, categorical_features=cols, encoding_type="ohe", handle_na=True)
-	data_transformed = cat_feats._one_hot()
-	print(data_transformed.head())
+	train_fe_ohe = cat_feats._one_hot()
+	
+	cat_feats = CategoricalFeatures(df_test, categorical_features=cols, encoding_type="ohe", handle_na=True)
+	test_fe_ohe = cat_feats._one_hot()
+	
+	cat_feats = CategoricalFeatures(df_ss, categorical_features=cols, encoding_type="ohe", handle_na=True)
+	ss_fe_ohe = cat_feats._one_hot()
+	
+
+	train_fe_ohe.to_csv("../input/interim/train_fe_ohe.csv", index=False)
+	test_fe_ohe.to_csv("../input/interim/test_fe_ohe.csv", index=False)
+	ss_fe_ohe.to_csv("../input/interim/ss_fe_ohe.csv", index=False)

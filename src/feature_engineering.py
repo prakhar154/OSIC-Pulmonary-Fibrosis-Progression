@@ -65,7 +65,7 @@ class FeatureEngineering:
 
 		self.train = all_data.loc[all_data.Dataset == 'train']
 		self.test = all_data.loc[all_data.Dataset == 'test']
-		self.submission = all_data.loc[all_data.Dataset == 'submission']
+		self.submission = all_data.loc[all_data.Dataset == 'ss']
 
 		return self.train, self.test, self.submission
 
@@ -78,8 +78,8 @@ if __name__ == "__main__":
 
 	train_fe, test_fe, ss_fe = fe.linear()
 	
-	train_fe.to_csv("../input/interim/train_fe.csv")
-	test_fe.to_csv("../input/interim/test_fe.csv")
-	ss_fe.to_csv("../input/interim/ss_fe.csv") 
+	train_fe.to_csv("../input/interim/train_fe.csv", index=False)
+	test_fe.to_csv("../input/interim/test_fe.csv", index=False)
+	ss_fe.to_csv("../input/interim/ss_fe.csv", index=False) 
 
 

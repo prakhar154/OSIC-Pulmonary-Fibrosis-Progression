@@ -2,7 +2,7 @@ import pandas as pd
 from sklearn.model_selection import GroupKFold
 
 if __name__ == "__main__":
-	df = pd.read_csv("../input/train.csv")
+	df = pd.read_csv("../input/interim/train_fe_ohe.csv")
 	df["kfold"] = -1
 	df = df.sample(frac=1).reset_index(drop=True)
 	groups = df['Patient'].values
@@ -13,4 +13,4 @@ if __name__ == "__main__":
 		print(len(train_idx), len(val_idx))
 		df.loc[val_idx, 'kfold'] = fold
 
-	df.to_csv("../input/train_folds.csv", index=False)
+	df.to_csv("../input/interim/train_fe_ohe_folds.csv", index=False)
